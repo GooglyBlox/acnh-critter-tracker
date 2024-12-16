@@ -141,7 +141,7 @@ export default function Home() {
       ) : (
         <div className="text-center py-12 space-y-4">
           <p className="text-text-secondary">No critters found matching your filters.</p>
-          <div className="w-96 h-96 mx-auto">
+          <div className="w-96 h- mx-auto">
             <img 
               src="/isabelle-stop.webp" 
               alt="Isabelle saying no results found"
