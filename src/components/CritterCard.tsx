@@ -100,21 +100,21 @@ export function CritterCard({ critter, currentHemisphere, onCaughtChange }: Crit
       <CardContent>
         <div className="space-y-3">
           <div className="space-y-2 bg-white/50 rounded-lg p-3">
-            <div className="flex items-center gap-2">
-              <Bell className="w-4 h-4 text-yellow-400" />
+            <div className="flex items-start gap-2">
+              <Bell className="w-4 h-4 shrink-0 mt-0.5 text-yellow-400" />
               <span className="text-sm">
                 {critter.price} bells
               </span>
             </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-primary" />
+            <div className="flex items-start gap-2">
+              <Calendar className="w-4 h-4 shrink-0 mt-0.5 text-primary" />
               <span className="text-sm">
                 {formatMonthList(availableMonths)}
               </span>
             </div>
             {isAvailable && (
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-primary" />
+              <div className="flex items-start gap-2">
+                <Clock className="w-4 h-4 shrink-0 mt-0.5 text-primary" />
                 <span className="text-sm">
                   {formatTimeRange(timeRanges)}
                 </span>
@@ -137,11 +137,11 @@ export function CritterCard({ critter, currentHemisphere, onCaughtChange }: Crit
             <div className="space-y-3 animate-fadeIn">
               <div className="space-y-2">
                 <div className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 shrink-0 mt-1 text-gray-500" />
+                  <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-gray-500" />
                   <span className="text-sm text-gray-600">{getLocation()}</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Ruler className="w-4 h-4 text-gray-500" />
+                <div className="flex items-start gap-2">
+                  <Ruler className="w-4 h-4 shrink-0 mt-0.5 text-gray-500" />
                   <span className="text-sm text-gray-600">{critter.size}</span>
                 </div>
               </div>
