@@ -53,7 +53,7 @@ export function CritterCard({ critter, currentHemisphere }: CritterCardProps) {
           <div className="p-2 bg-white rounded-full shadow-sm">
             {getCritterIcon()}
           </div>
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1 pr-20">
             <CritterTooltip
               title={critter.name.split(' ').map(word => 
                 word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
