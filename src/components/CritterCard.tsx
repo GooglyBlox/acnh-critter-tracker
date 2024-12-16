@@ -3,6 +3,7 @@ import type { Critter, Hemisphere } from '@/types';
 import { formatTimeRange, parseTimeRanges, formatMonthList } from '@/lib/date-utils';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Bell, Fish, Bug, Anchor, Clock, Calendar, MapPin, Ruler, Info } from 'lucide-react';
+import { CritterTooltip } from './TooltipComponent';
 
 interface CritterCardProps {
   critter: Critter;
@@ -52,18 +53,26 @@ export function CritterCard({ critter, currentHemisphere }: CritterCardProps) {
             {getCritterIcon()}
           </div>
           <div className="min-w-0">
-            <h3 
-              className="text-lg font-bold capitalize text-gray-800 truncate cursor-help"
-              title={critter.name}
+                          <CritterTooltip
+              title={critter.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}
+              content={critter.description}
+              side="top"
+              align="start"
             >
-              {critter.name}
-            </h3>
-            <p 
-              className="text-sm text-gray-500 italic line-clamp-2 cursor-help"
-              title={critter.catchPhrase}
+              <h3 className="text-lg font-bold capitalize text-gray-800 truncate hover:cursor-help">
+                {critter.name}
+              </h3>
+            </CritterTooltip>
+            <CritterTooltip
+              title="Catch Phrase"
+              content={critter.catchPhrase}
+              side="bottom"
+              align="start"
             >
-              {critter.catchPhrase}
-            </p>
+              <p className="text-sm text-gray-500 italic line-clamp-2 hover:cursor-help">
+                {critter.catchPhrase}
+              </p>
+            </CritterTooltip>
           </div>
         </div>
       </CardHeader>
