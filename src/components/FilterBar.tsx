@@ -15,7 +15,7 @@ export function FilterBar({ onFilterChange, totalResults, currentFilters }: Filt
   };
 
   return (
-    <div className="sticky top-0 z-10 p-4 mb-4 bg-white/80 backdrop-blur-sm border-b">
+    <div className="sticky top-0 z-20 p-4 mb-4 bg-white/80 backdrop-blur-sm border-b">
       <div className="container mx-auto">
         <div className="flex flex-wrap items-center gap-4">
           <div className="relative flex-1">
