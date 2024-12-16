@@ -1,8 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState } from 'react';
 import type { Critter, Hemisphere } from '@/types';
 import { formatTimeRange, parseTimeRanges, formatMonthList } from '@/lib/date-utils';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import { Bell, Fish, Bug, Anchor, Clock, Calendar, MapPin, Ruler, Info } from 'lucide-react';
+import { Bell, Clock, Calendar, MapPin, Ruler, Info } from 'lucide-react';
 import { CritterTooltip } from './TooltipComponent';
 import { CaughtButton } from './CaughtButton';
 
@@ -23,15 +24,17 @@ export function CritterCard({ critter, currentHemisphere, onCaughtChange }: Crit
   const timeRanges = isAvailable ? parseTimeRanges(currentTimeStr) : [];
   const availableMonths = critter.monthsAvailable[currentHemisphere];
 
-  const getCritterIcon = () => {
-    switch (critter.category) {
-      case 'fish':
-        return <Fish className="w-6 h-6 text-blue-400" />;
-      case 'insect':
-        return <Bug className="w-6 h-6 text-green-400" />;
-      case 'seaCreature':
-        return <Anchor className="w-6 h-6 text-cyan-400" />;
-    }
+  const getIconPath = () => {
+    const categoryFolder = {
+      fish: 'fish',
+      insect: 'bugs',
+      seaCreature: 'sea_creatures'
+    }[critter.category];
+
+    const formattedName = critter.name
+      .replace(/'/g, '_');
+
+    return `/icons/${categoryFolder}/${formattedName} NH Icon.png`;
   };
 
   const getAvailabilityColor = () => {
@@ -52,7 +55,13 @@ export function CritterCard({ critter, currentHemisphere, onCaughtChange }: Crit
       <CardHeader className="pt-6 pb-4">
         <div className="flex items-start gap-3">
           <div className="p-2 bg-white rounded-full shadow-sm">
-            {getCritterIcon()}
+            <img 
+              src={getIconPath()} 
+              alt={`${critter.name} icon`}
+              width={32}
+              height={32}
+              className="w-9 h-9 object-contain"
+            />
           </div>
           <div className="min-w-0 flex-1 pr-20">
             <CritterTooltip
