@@ -42,6 +42,9 @@ export function Layout({ children }: LayoutProps) {
                             <span>GitHub</span>
                         </a>
                         <span className="text-text-secondary flex items-center gap-1">
+                            |
+                        </span>
+                        <span className="text-text-secondary flex items-center gap-1">
                             Made with <Leaf className="w-4 h-4 text-primary" /> by GooglyBlox
                         </span>
                     </div>
