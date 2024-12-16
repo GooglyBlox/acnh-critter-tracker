@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Layout } from '@/components/Layout';
 import { FilterBar } from '@/components/FilterBar';
 import { CritterGrid } from '@/components/CritterGrid';
+import HemisphereToggle from '@/components/HemisphereToggle';
 import type { Critter, FilterOptions, Hemisphere } from '@/types';
 import { isCurrentlyAvailable } from '@/lib/utils';
 
@@ -114,12 +115,10 @@ export default function Home() {
   return (
     <Layout>
       <div className="mb-4 flex justify-end">
-        <button
-          onClick={toggleHemisphere}
-          className="px-4 py-2 bg-secondary text-white rounded-lg hover:opacity-90 transition-opacity"
-        >
-          {hemisphere === 'NH' ? 'Northern' : 'Southern'} Hemisphere
-        </button>
+        <HemisphereToggle
+          hemisphere={hemisphere}
+          onToggle={toggleHemisphere}
+        />
       </div>
       
       <FilterBar
