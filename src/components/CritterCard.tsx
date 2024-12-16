@@ -33,10 +33,17 @@ export function CritterCard({ critter, currentHemisphere, onCaughtChange }: Crit
 
     const formattedName = critter.name
       .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .map(word => {
+        if (word.includes('-')) {
+          return word.split('-')
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+            .join('-');
+        }
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
       .join(' ')
       .replace(/'/g, '_');
-
+  
     return `/icons/${categoryFolder}/${formattedName} NH Icon.png`;
   };
 
