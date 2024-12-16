@@ -105,6 +105,13 @@ export default function Home() {
     setHemisphere(prev => prev === 'NH' ? 'SH' : 'NH');
   };
 
+  const handleCaughtChange = (critterId: string, newStatus: boolean) => {
+    if ((filters.caught === 'uncaught' && newStatus) || 
+        (filters.caught === 'caught' && !newStatus)) {
+      setFilteredCritters(prev => prev.filter(critter => critter.id !== critterId));
+    }
+  };
+
   if (error) {
     return (
       <Layout>
@@ -145,6 +152,7 @@ export default function Home() {
         <CritterGrid
           critters={filteredCritters}
           currentHemisphere={hemisphere}
+          onCaughtChange={handleCaughtChange}
         />
       ) : (
         <div className="text-center py-12 space-y-4">

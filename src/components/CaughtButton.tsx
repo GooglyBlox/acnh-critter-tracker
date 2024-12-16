@@ -5,9 +5,10 @@ import { useState, useEffect } from 'react';
 interface CaughtButtonProps {
   critterId: string;
   className?: string;
+  onCaughtChange?: (newStatus: boolean) => void;
 }
 
-export function CaughtButton({ critterId, className = '' }: CaughtButtonProps) {
+export function CaughtButton({ critterId, className = '', onCaughtChange }: CaughtButtonProps) {
   const [isCaught, setIsCaught] = useState(false);
 
   useEffect(() => {
@@ -18,6 +19,7 @@ export function CaughtButton({ critterId, className = '' }: CaughtButtonProps) {
     e.stopPropagation();
     const newStatus = toggleCaughtStatus(critterId);
     setIsCaught(newStatus);
+    onCaughtChange?.(newStatus);
   };
 
   return (

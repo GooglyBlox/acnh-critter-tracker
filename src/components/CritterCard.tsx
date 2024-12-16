@@ -9,9 +9,10 @@ import { CaughtButton } from './CaughtButton';
 interface CritterCardProps {
   critter: Critter;
   currentHemisphere: Hemisphere;
+  onCaughtChange?: (critterId: string, newStatus: boolean) => void;
 }
 
-export function CritterCard({ critter, currentHemisphere }: CritterCardProps) {
+export function CritterCard({ critter, currentHemisphere, onCaughtChange }: CritterCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -78,7 +79,10 @@ export function CritterCard({ critter, currentHemisphere }: CritterCardProps) {
             </CritterTooltip>
           </div>
         </div>
-        <CaughtButton critterId={critter.id} />
+        <CaughtButton 
+          critterId={critter.id}
+          onCaughtChange={(newStatus) => onCaughtChange?.(critter.id, newStatus)}
+        />
       </CardHeader>
       
       <CardContent>
