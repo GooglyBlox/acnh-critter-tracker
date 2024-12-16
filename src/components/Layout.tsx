@@ -33,7 +33,7 @@ export function Layout({ children }: LayoutProps) {
                 <div className="container mx-auto px-4 py-3">
                     <div className="flex items-center justify-center gap-4 text-sm">
                         <a
-                            href="https://github.com/GooglyBlox/acnh-api"
+                            href="https://github.com/GooglyBlox/acnh-critter-tracker"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 text-text-secondary hover:text-primary transition-colors"
