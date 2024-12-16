@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -138,8 +139,15 @@ export default function Home() {
           currentHemisphere={hemisphere}
         />
       ) : (
-        <div className="text-center py-12">
+        <div className="text-center py-12 space-y-4">
           <p className="text-text-secondary">No critters found matching your filters.</p>
+          <div className="w-96 h-96 mx-auto">
+            <img 
+              src="/isabelle-stop.webp" 
+              alt="Isabelle saying no results found"
+              className="w-full h-full object-contain"
+            />
+          </div>
         </div>
       )}
     </Layout>
