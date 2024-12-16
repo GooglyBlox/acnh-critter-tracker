@@ -8,11 +8,13 @@ import { CritterGrid } from '@/components/CritterGrid';
 import HemisphereToggle from '@/components/HemisphereToggle';
 import type { Critter, FilterOptions, Hemisphere } from '@/types';
 import { isCurrentlyAvailable } from '@/lib/utils';
+import { isCritterCaught } from '@/lib/caught-utils';
 
 const defaultFilters: FilterOptions = {
   search: '',
   category: 'all',
   onlyAvailable: false,
+  caught: 'all',
   sortBy: 'availability'
 };
 
@@ -55,6 +57,13 @@ export default function Home() {
           return true;
         }
         return isCurrentlyAvailable(critter, hemisphere);
+      });
+    }
+
+    if (filters.caught !== 'all') {
+      result = result.filter(critter => {
+        const isCaught = isCritterCaught(critter.id);
+        return filters.caught === 'caught' ? isCaught : !isCaught;
       });
     }
 

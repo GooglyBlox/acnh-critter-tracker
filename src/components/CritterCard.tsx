@@ -4,6 +4,7 @@ import { formatTimeRange, parseTimeRanges, formatMonthList } from '@/lib/date-ut
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Bell, Fish, Bug, Anchor, Clock, Calendar, MapPin, Ruler, Info } from 'lucide-react';
 import { CritterTooltip } from './TooltipComponent';
+import { CaughtButton } from './CaughtButton';
 
 interface CritterCardProps {
   critter: Critter;
@@ -47,14 +48,16 @@ export function CritterCard({ critter, currentHemisphere }: CritterCardProps) {
       className={`relative overflow-hidden transition-all duration-200 hover:scale-102 
         ${getAvailabilityColor()} border-2 rounded-2xl`}
     >
-      <CardHeader className="pt-6 pr-24">
+      <CardHeader className="pt-6 pb-4">
         <div className="flex items-start gap-3">
           <div className="p-2 bg-white rounded-full shadow-sm">
             {getCritterIcon()}
           </div>
-          <div className="min-w-0">
-                          <CritterTooltip
-              title={critter.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}
+          <div className="min-w-0 flex-1">
+            <CritterTooltip
+              title={critter.name.split(' ').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+              ).join(' ')}
               content={critter.description}
               side="top"
               align="start"
@@ -69,24 +72,24 @@ export function CritterCard({ critter, currentHemisphere }: CritterCardProps) {
               side="bottom"
               align="start"
             >
-              <p className="text-sm text-gray-500 italic line-clamp-2 hover:cursor-help">
+              <p className="text-sm text-gray-500 italic line-clamp-2 hover:cursor-help mt-1">
                 {critter.catchPhrase}
               </p>
             </CritterTooltip>
           </div>
         </div>
+        <CaughtButton critterId={critter.id} />
       </CardHeader>
-
-      <div className="absolute top-0 right-0 p-3 bg-white rounded-bl-2xl border-l border-b z-10">
-        <div className="flex items-center gap-1">
-          <Bell className="w-4 h-4 text-yellow-400" />
-          <span className="font-medium text-gray-700">{critter.price}</span>
-        </div>
-      </div>
       
       <CardContent>
         <div className="space-y-3">
           <div className="space-y-2 bg-white/50 rounded-lg p-3">
+            <div className="flex items-center gap-2">
+              <Bell className="w-4 h-4 text-yellow-400" />
+              <span className="text-sm">
+                {critter.price} bells
+              </span>
+            </div>
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-primary" />
               <span className="text-sm">

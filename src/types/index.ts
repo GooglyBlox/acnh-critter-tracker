@@ -90,6 +90,7 @@ export interface FilterOptions {
   search: string;
   category: 'all' | CritterCategory;
   onlyAvailable: boolean;
+  caught: 'all' | 'caught' | 'uncaught';
   sortBy: 'name' | 'price' | 'availability';
 }
 

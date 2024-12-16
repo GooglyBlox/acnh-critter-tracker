@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import SearchBar from './SearchBar';
-import type { FilterOptions } from '@/types';
 import CustomDropdown from './CustomDropdown';
+import { FilterDropdown } from './FilterDropdown';
+import type { FilterOptions } from '@/types';
 
 interface FilterBarProps {
   onFilterChange: (filters: FilterOptions) => void;
@@ -32,48 +33,37 @@ export function FilterBar({ onFilterChange, totalResults, currentFilters }: Filt
   return (
     <div className="sticky top-0 z-20 p-4 mb-4 bg-white/80 backdrop-blur-sm border-b">
       <div className="container mx-auto">
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex items-center gap-3">
           <SearchBar
             value={currentFilters.search}
             onChange={(value) => handleChange('search', value)}
+            className="flex-1"
           />
           
-          <CustomDropdown
-            options={categoryOptions}
-            value={currentFilters.category}
-            onChange={(value) => handleChange('category', value)}
-            className="w-40"
-          />
-          
-          <CustomDropdown
-            options={sortOptions}
-            value={currentFilters.sortBy}
-            onChange={(value) => handleChange('sortBy', value as FilterOptions['sortBy'])}
-            className="w-48"
-          />
-          
-          <label className="flex items-center gap-2 cursor-pointer group select-none">
-            <div className="relative">
-              <input
-                type="checkbox"
-                checked={currentFilters.onlyAvailable}
-                onChange={(e) => handleChange('onlyAvailable', e.target.checked)}
-                className="sr-only peer"
-              />
-              <div className="w-5 h-5 bg-white border-2 border-primary rounded 
-                peer-checked:bg-primary peer-checked:border-primary transition-all" 
-              />
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                text-white opacity-0 peer-checked:opacity-100 transition-opacity text-sm">
-                ✓
-              </div>
-            </div>
-            <span className="text-sm text-text">Available now</span>
-          </label>
-          
-          <p className="text-sm text-text-secondary ml-auto">
-            Found {totalResults} critters
-          </p>
+          <div className="flex items-center gap-3">
+            <CustomDropdown
+              options={categoryOptions}
+              value={currentFilters.category}
+              onChange={(value) => handleChange('category', value)}
+              className="w-40"
+            />
+            
+            <CustomDropdown
+              options={sortOptions}
+              value={currentFilters.sortBy}
+              onChange={(value) => handleChange('sortBy', value)}
+              className="w-48"
+            />
+            
+            <FilterDropdown
+              filters={currentFilters}
+              onChange={handleChange}
+            />
+            
+            <p className="text-sm text-text-secondary border-l pl-3">
+              Found {totalResults} critters
+            </p>
+          </div>
         </div>
       </div>
     </div>
