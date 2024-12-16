@@ -32,6 +32,9 @@ export function CritterCard({ critter, currentHemisphere, onCaughtChange }: Crit
     }[critter.category];
 
     const formattedName = critter.name
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ')
       .replace(/'/g, '_');
 
     return `/icons/${categoryFolder}/${formattedName} NH Icon.png`;
