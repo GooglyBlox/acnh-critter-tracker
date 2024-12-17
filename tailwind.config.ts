@@ -15,12 +15,23 @@ const config: Config = {
       },
       animation: {
         'fadeIn': 'fadeIn 0.2s ease-in',
+        'float': 'float 2s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
           '0%': { opacity: '0', transform: 'translateY(10px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        float: {
+          '0%, 100%': { 
+            transform: 'translateY(0) rotate(0deg)',
+            filter: 'brightness(1)'
+          },
+          '50%': { 
+            transform: 'translateY(-10px) rotate(5deg)',
+            filter: 'brightness(1.1)'
+          }
+        }
       },
     },
   },

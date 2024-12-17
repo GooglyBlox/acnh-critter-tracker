@@ -6,6 +6,7 @@ import { Layout } from '@/components/Layout';
 import { FilterBar } from '@/components/FilterBar';
 import { CritterGrid } from '@/components/CritterGrid';
 import HemisphereToggle from '@/components/HemisphereToggle';
+import LoadingView from '@/components/LoadingView';
 import type { Critter, FilterOptions, Hemisphere } from '@/types';
 import { isCurrentlyAvailable } from '@/lib/utils';
 import { isCritterCaught } from '@/lib/caught-utils';
@@ -144,10 +145,7 @@ export default function Home() {
       />
 
       {loading ? (
-        <div className="text-center py-12">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="mt-4 text-text-secondary">Loading critters...</p>
-        </div>
+        <LoadingView />
       ) : filteredCritters.length > 0 ? (
         <CritterGrid
           critters={filteredCritters}
@@ -157,7 +155,7 @@ export default function Home() {
       ) : (
         <div className="text-center py-12 space-y-4">
           <p className="text-text-secondary">No critters found matching your filters.</p>
-          <div className="w-96 h- mx-auto">
+          <div className="w-96 mx-auto">
             <img 
               src="/isabelle-stop.webp" 
               alt="Isabelle saying no results found"
