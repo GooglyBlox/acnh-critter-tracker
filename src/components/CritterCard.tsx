@@ -4,7 +4,7 @@ import type { Critter, Hemisphere } from '@/types';
 import { formatTimeRange, parseTimeRanges, formatMonthList } from '@/lib/date-utils';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Bell, Clock, Calendar, MapPin, Ruler, Info } from 'lucide-react';
-import { CritterTooltip } from './TooltipComponent';
+import { CritterTooltip } from './ui/tooltip';
 import { CaughtButton } from './CaughtButton';
 
 interface CritterCardProps {
