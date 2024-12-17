@@ -176,6 +176,24 @@ export function CritterCard({ critter, currentHemisphere, onCaughtChange }: Crit
                     Spawn Rate: {critter.spawnRates}
                   </span>
                 )}
+                {critter.shadow && (
+                  <span className="px-3 py-1 text-xs font-medium rounded-full 
+                    bg-green-50 text-green-700 border border-green-200">
+                    Shadow Size: {critter.shadow}
+                  </span>
+                )}
+                {critter.weather && (
+                  <span className="px-3 py-1 text-xs font-medium rounded-full 
+                    bg-red-50 text-red-700 border border-red-200">
+                    Weather: {critter.weather}
+                  </span>
+                )}
+                {critter.movementSpeed && (
+                  <span className="px-3 py-1 text-xs font-medium rounded-full 
+                    bg-orange-50 text-orange-700 border border-orange-200">
+                    Movement Speed: {critter.movementSpeed}
+                  </span>
+                )}
               </div>
 
               <button 
