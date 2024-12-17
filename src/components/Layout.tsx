@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import { Leaf, Github } from 'lucide-react';
+import { Github } from 'lucide-react';
+import ACLeaf from './ACLeaf';
 
 interface LayoutProps {
     children: ReactNode;
@@ -12,7 +13,7 @@ export function Layout({ children }: LayoutProps) {
                 <div className="absolute inset-x-0 bottom-0 h-px bg-white/10" />
                 <div className="container mx-auto px-4 py-4">
                     <div className="flex items-center gap-3">
-                        <Leaf className="w-5 h-5 text-white/90" />
+                        <ACLeaf className="w-6 h-6 text-white/90" strokeWidth={1} />
                         <div>
                             <h1 className="text-2xl font-bold text-white">
                                 ACNH Critter Tracker
@@ -45,7 +46,7 @@ export function Layout({ children }: LayoutProps) {
                             |
                         </span>
                         <span className="text-text-secondary flex items-center gap-1">
-                            Made with <Leaf className="w-4 h-4 text-primary" /> by GooglyBlox
+                            Made with <ACLeaf className="w-4 h-4 text-primary" strokeWidth={40} /> by GooglyBlox
                         </span>
                     </div>
                 </div>
