@@ -170,10 +170,10 @@ export function CritterCard({ critter, currentHemisphere, onCaughtChange }: Crit
                     {critter.vision} vision
                   </span>
                 )}
-                {critter.spawnRates && (
+                {critter.spawnRates && Number(critter.spawnRates) !== 0 && (
                   <span className="px-3 py-1 text-xs font-medium rounded-full 
                     bg-purple-50 text-purple-700 border border-purple-200">
-                    Spawn Rate: {critter.spawnRates}
+                    Spawn Rate: {critter.spawnRates}%
                   </span>
                 )}
                 {critter.shadow && (
