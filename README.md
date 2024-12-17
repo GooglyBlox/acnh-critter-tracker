@@ -37,7 +37,7 @@ npm run start
 
 ## Attribution
 
-- Data provided by [ACNH Spreadsheet](https://docs.google.com/spreadsheets/d/13d_LAJPlxMa_DubPTuirkIV4DERBMXbrWQsmSh8ReK4)
+- Data provided by [ACNH Spreadsheet](https://docs.google.com/spreadsheets/d/13d_LAJPlxMa_DubPTuirkIV4DERBMXbrWQsmSh8ReK4) (oops... [this is a thing?](https://github.com/NooksBazaar/google-sheets-to-json))
 - Some assets from ["Why are you here?"](https://shinobi-bacon.tumblr.com/post/189191798263/i-went-back-and-made-two-more-isabelle-gifs-her) on Tumblr
 - Additional assets from [Nintendo's ACNH store page](https://www.nintendo.com/us/store/characters/animal-crossing/)
 - Background pattern sourced from [Nookipedia](https://nookipedia.com/wiki/Main_Page)
