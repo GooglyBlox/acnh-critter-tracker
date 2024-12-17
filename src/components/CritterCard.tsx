@@ -64,7 +64,7 @@ export function CritterCard({ critter, currentHemisphere, onCaughtChange }: Crit
     >
       <CardHeader className="pt-6 pb-4">
         <div className="flex items-start gap-3">
-          <div className="p-2 bg-white rounded-full shadow-sm">
+          <div className="p-2 bg-white rounded-full">
             <img 
               src={getIconPath()} 
               alt={`${critter.name} icon`}
