@@ -46,7 +46,7 @@ export function Layout({ children }: LayoutProps) {
                             |
                         </span>
                         <span className="text-text-secondary flex items-center gap-1">
-                            Made with <ACLeaf className="w-4 h-4 text-primary" strokeWidth={40} /> by GooglyBlox
+                            Made with <ACLeaf className="w-4 h-4 text-primary" strokeWidth={1} /> by GooglyBlox
                         </span>
                     </div>
                 </div>
