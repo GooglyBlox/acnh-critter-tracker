@@ -7,9 +7,10 @@ import { getCaughtCount } from '@/lib/caught-utils';
 interface FilterDropdownProps {
   filters: FilterOptions;
   onChange: (key: keyof FilterOptions, value: any) => void;
+  className?: string;
 }
 
-export function FilterDropdown({ filters, onChange }: FilterDropdownProps) {
+export function FilterDropdown({ filters, onChange, className = '' }: FilterDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -32,12 +33,12 @@ export function FilterDropdown({ filters, onChange }: FilterDropdownProps) {
   };
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 text-sm font-medium 
-          bg-white rounded-lg border-2 border-primary hover:border-secondary 
-          transition-colors"
+        className="w-full lg:w-auto flex items-center justify-center gap-2 px-3 py-2 
+          text-sm font-medium bg-white rounded-lg border-2 border-primary 
+          hover:border-secondary transition-colors"
       >
         <Filter className="w-4 h-4" />
         <span>Filters</span>

@@ -33,7 +33,43 @@ export function FilterBar({ onFilterChange, totalResults, currentFilters }: Filt
   return (
     <div className="sticky top-0 z-20 p-4 mb-4 bg-white/80 backdrop-blur-sm border-b">
       <div className="container mx-auto">
-        <div className="flex items-center gap-3">
+        {/* Mobile Layout */}
+        <div className="flex flex-col space-y-3 lg:hidden">
+          <SearchBar
+            value={currentFilters.search}
+            onChange={(value) => handleChange('search', value)}
+            className="w-full"
+          />
+          
+          <div className="flex flex-wrap gap-2">
+            <CustomDropdown
+              options={categoryOptions}
+              value={currentFilters.category}
+              onChange={(value) => handleChange('category', value)}
+              className="w-[calc(50%-4px)]"
+            />
+            
+            <CustomDropdown
+              options={sortOptions}
+              value={currentFilters.sortBy}
+              onChange={(value) => handleChange('sortBy', value)}
+              className="w-[calc(50%-4px)]"
+            />
+            
+            <FilterDropdown
+              filters={currentFilters}
+              onChange={handleChange}
+              className="w-full"
+            />
+          </div>
+          
+          <p className="text-sm text-text-secondary">
+            Found {totalResults} critters
+          </p>
+        </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden lg:flex lg:items-center lg:gap-3">
           <SearchBar
             value={currentFilters.search}
             onChange={(value) => handleChange('search', value)}
