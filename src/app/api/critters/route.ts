@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { processCSVData } from '@/lib/data-processing';
-import { isCurrentlyAvailable } from '@/lib/utils';
+import { isCurrentlyAvailable } from '@/lib/date-utils';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import type { Critter } from '@/types';

@@ -8,7 +8,7 @@ import { CritterGrid } from '@/components/CritterGrid';
 import HemisphereToggle from '@/components/HemisphereToggle';
 import LoadingView from '@/components/LoadingView';
 import type { Critter, FilterOptions, Hemisphere } from '@/types';
-import { isCurrentlyAvailable } from '@/lib/utils';
+import { isCurrentlyAvailable } from '@/lib/date-utils';
 import { isCritterCaught } from '@/lib/caught-utils';
 
 const defaultFilters: FilterOptions = {
