@@ -117,10 +117,9 @@ export function isCurrentlyAvailable(critter: Critter, hemisphere: Hemisphere = 
     return timeRanges.some(range => {
         if (range.start === 0 && range.end === 24) return true;
         
-        if (range.start <= range.end) {
-            return currentHour >= range.start && currentHour < range.end;
-        } else {
+        if (range.start > range.end) {
             return currentHour >= range.start || currentHour < range.end;
         }
+        return currentHour >= range.start && currentHour < range.end;
     });
 }

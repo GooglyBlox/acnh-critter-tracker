@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from 'react';
 import type { Critter, Hemisphere } from '@/types';
-import { formatTimeRange, parseTimeRanges, formatMonthList } from '@/lib/date-utils';
+import { formatTimeRange, parseTimeRanges, formatMonthList, isCurrentlyAvailable } from '@/lib/date-utils';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Bell, Clock, Calendar, MapPin, Ruler, Info } from 'lucide-react';
 import { CritterTooltip } from './ui/tooltip';
@@ -18,8 +18,10 @@ export function CritterCard({ critter, currentHemisphere, onCaughtChange }: Crit
   
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const currentMonth = new Date().getMonth();
-  const monthKey = `${currentHemisphere} ${monthNames[currentMonth]}`;
+  const monthKey = `${currentHemisphere} ${monthNames[currentMonth]}` as keyof Critter;
   const currentTimeStr = critter[monthKey];
+  const isMonthAvailable = currentTimeStr && currentTimeStr !== 'NA';
+  const isTimeAvailable = isCurrentlyAvailable(critter, currentHemisphere);
   const isAvailable = currentTimeStr && currentTimeStr !== 'NA';
   const timeRanges = isAvailable ? parseTimeRanges(currentTimeStr) : [];
   const availableMonths = critter.monthsAvailable[currentHemisphere];
@@ -48,8 +50,9 @@ export function CritterCard({ critter, currentHemisphere, onCaughtChange }: Crit
   };
 
   const getAvailabilityColor = () => {
-    if (!isAvailable) return 'bg-red-50 border-red-200';
-    return 'bg-green-50 border-green-200';
+    if (!isMonthAvailable) return 'border-red-200';
+    if (!isTimeAvailable) return 'border-amber-200';
+    return 'border-green-200';
   };
 
   const getLocation = () => {
