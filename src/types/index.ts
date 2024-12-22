@@ -93,15 +93,3 @@ export interface FilterOptions {
   caught: 'all' | 'caught' | 'uncaught';
   sortBy: 'name' | 'price' | 'availability';
 }
-
-export function isFishCSV(row: BaseCritterCSV): row is FishFields {
-  return 'Shadow' in row && 'Catch Difficulty' in row && 'Vision' in row;
-}
-
-export function isInsectCSV(row: BaseCritterCSV): row is InsectFields {
-  return 'Weather' in row;
-}
-
-export function isSeaCreatureCSV(row: BaseCritterCSV): row is SeaCreatureFields {
-  return 'Movement Speed' in row;
-}

@@ -66,11 +66,6 @@ export function formatTimeRange(timeRanges: TimeRange[]): string {
         .join(' & ');
 }
 
-export function getMonthValue(critter: BaseCritterCSV, hemisphere: Hemisphere, month: number): string {
-    const key = getMonthKeyForCSV(hemisphere, month);
-    return (critter[key] || 'NA') as string;
-}
-
 export function formatMonthList(months: number[]): string {
     if (months.length === 12) return 'All year';
     if (months.length === 0) return 'Never';
@@ -101,17 +96,4 @@ export function formatMonthList(months: number[]): string {
     }
 
     return ranges.join(', ');
-}
-
-export function isTimeInRange(hour: number, ranges: TimeRange[]): boolean {
-    if (!ranges || ranges.length === 0) return false;
-
-    return ranges.some(range => {
-        if (range.start === 0 && range.end === 24) return true;
-        if (range.start <= range.end) {
-            return hour >= range.start && hour < range.end;
-        } else {
-            return hour >= range.start || hour < range.end;
-        }
-    });
 }

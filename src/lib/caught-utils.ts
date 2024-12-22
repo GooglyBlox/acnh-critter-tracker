@@ -38,11 +38,3 @@ export function isCritterCaught(critterId: string): boolean {
 export function getCaughtCount(): number {
   return getCaughtCritters().size;
 }
-
-export function clearCaughtCritters(): void {
-  try {
-    localStorage.removeItem(STORAGE_KEY);
-  } catch (error) {
-    console.error('Error clearing caught critters from localStorage:', error);
-  }
-}
