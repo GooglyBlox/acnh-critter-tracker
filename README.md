@@ -1,6 +1,12 @@
+<div align="center">
+
+<img src="public/acnh-icon.png" alt="ACNH Icon" width="64" height="64" style="vertical-align: middle" />
+
 # ACNH Critter Tracker
 
 Track and catch critters in Animal Crossing: New Horizons with real-time availability.
+
+</div>
 
 ## Features
 
