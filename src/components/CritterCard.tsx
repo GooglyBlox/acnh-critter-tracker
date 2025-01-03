@@ -135,11 +135,11 @@ export function CritterCard({ critter, currentHemisphere, onCaughtChange }: Crit
           {!isExpanded && (
             <button 
               onClick={() => setIsExpanded(true)}
-              className="w-full py-2 mt-2 text-sm font-medium text-primary hover:bg-primary/10 
-                rounded-lg transition-colors flex items-center justify-center gap-1"
+              className="w-full py-2.5 mt-2 text-sm font-medium text-primary hover:bg-primary/10 
+                rounded-lg transition-colors flex items-center justify-center gap-1.5"
             >
               <Info className="w-4 h-4" />
-              More Info
+              More Details
             </button>
           )}
           
