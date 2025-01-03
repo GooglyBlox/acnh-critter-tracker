@@ -78,23 +78,52 @@ export function formatMonthList(months: number[]): string {
         'July', 'August', 'September', 'October', 'November', 'December'
     ];
 
-    const ranges: string[] = [];
-    let start = months[0];
-    let prev = months[0];
+    if (months.length === 0) return 'Never';
 
-    for (let i = 1; i <= months.length; i++) {
-        if (i === months.length || months[i] !== prev + 1) {
+    const sortedMonths = [...months].sort((a, b) => a - b);
+
+    const wrapsAround = sortedMonths.includes(12) && sortedMonths.includes(1);
+    
+    if (wrapsAround) {
+        const januaryIndex = sortedMonths.indexOf(1);
+        const rotatedMonths = [
+            ...sortedMonths.slice(januaryIndex),
+            ...sortedMonths.slice(0, januaryIndex)
+        ];
+        sortedMonths.length = 0;
+        sortedMonths.push(...rotatedMonths);
+    }
+
+    const ranges: string[] = [];
+    let start = sortedMonths[0];
+    let prev = sortedMonths[0];
+
+    for (let i = 1; i <= sortedMonths.length; i++) {
+        if (i === sortedMonths.length || sortedMonths[i] !== prev + 1) {
             if (start === prev) {
                 ranges.push(monthNames[start - 1]);
             } else {
                 ranges.push(`${monthNames[start - 1]} - ${monthNames[prev - 1]}`);
             }
-            if (i < months.length) {
-                start = months[i];
-                prev = months[i];
+            if (i < sortedMonths.length) {
+                start = sortedMonths[i];
+                prev = sortedMonths[i];
             }
         } else {
-            prev = months[i];
+            prev = sortedMonths[i];
+        }
+    }
+
+    if (ranges.length > 1 && wrapsAround) {
+        const firstRange = ranges[0];
+        const lastRange = ranges[ranges.length - 1];
+        
+        if (firstRange.includes('January') && lastRange.includes('December')) {
+            const startMonth = lastRange.split(' - ')[0];
+            const endMonth = firstRange.split(' - ').pop();
+            ranges.splice(0, 1);
+            ranges.splice(-1, 1);
+            ranges.unshift(`${startMonth} - ${endMonth}`);
         }
     }
 
