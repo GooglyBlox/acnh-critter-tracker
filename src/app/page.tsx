@@ -27,6 +27,7 @@ export default function Home() {
   const [hemisphere, setHemisphere] = useState<Hemisphere>('NH');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
     const fetchCritters = async () => {
@@ -107,6 +108,25 @@ export default function Home() {
     setIsHemisphereLoaded(true);
   }, []);
 
+  useEffect(() => {
+    const fetchCritters = async () => {
+      try {
+        const response = await fetch('/api/critters');
+        if (!response.ok) throw new Error('Failed to fetch critters');
+        const data = await response.json();
+        setCritters(data);
+      } catch (err) {
+        console.error('Error fetching critters:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load critters');
+      } finally {
+        setLoading(false);
+        setIsInitialLoad(false);
+      }
+    };
+  
+    fetchCritters();
+  }, []);
+
   const handleFilterChange = (newFilters: FilterOptions) => {
     setFilters(newFilters);
   };
@@ -157,7 +177,7 @@ export default function Home() {
         currentFilters={filters}
       />
 
-      {loading ? (
+      {loading || isInitialLoad ? (
         <LoadingView />
       ) : filteredCritters.length > 0 ? (
         <CritterGrid
