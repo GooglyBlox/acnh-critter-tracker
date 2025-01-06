@@ -23,6 +23,7 @@ export default function Home() {
   const [critters, setCritters] = useState<Critter[]>([]);
   const [filteredCritters, setFilteredCritters] = useState<Critter[]>([]);
   const [filters, setFilters] = useState<FilterOptions>(defaultFilters);
+  const [isHemisphereLoaded, setIsHemisphereLoaded] = useState(false);
   const [hemisphere, setHemisphere] = useState<Hemisphere>('NH');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -98,12 +99,22 @@ export default function Home() {
     setFilteredCritters(result);
   }, [critters, filters, hemisphere]);
 
+  useEffect(() => {
+    const stored = localStorage.getItem('acnh-hemisphere');
+    if (stored === 'SH' || stored === 'NH') {
+      setHemisphere(stored);
+    }
+    setIsHemisphereLoaded(true);
+  }, []);
+
   const handleFilterChange = (newFilters: FilterOptions) => {
     setFilters(newFilters);
   };
 
   const toggleHemisphere = () => {
-    setHemisphere(prev => prev === 'NH' ? 'SH' : 'NH');
+    const newHemisphere = hemisphere === 'NH' ? 'SH' : 'NH';
+    setHemisphere(newHemisphere);
+    localStorage.setItem('acnh-hemisphere', newHemisphere);
   };
 
   const handleCaughtChange = (critterId: string, newStatus: boolean) => {
@@ -132,10 +143,12 @@ export default function Home() {
   return (
     <Layout>
       <div className="mb-4 flex justify-end">
-        <HemisphereToggle
-          hemisphere={hemisphere}
-          onToggle={toggleHemisphere}
-        />
+        <div className={`transition-opacity duration-200 ${isHemisphereLoaded ? 'opacity-100' : 'opacity-0'}`}>
+          <HemisphereToggle
+            hemisphere={hemisphere}
+            onToggle={toggleHemisphere}
+          />
+        </div>
       </div>
       
       <FilterBar
