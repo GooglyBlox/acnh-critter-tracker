@@ -79,23 +79,41 @@ export default function Home() {
     }
 
     result.sort((a, b) => {
-      switch (filters.sortBy) {
-        case 'name':
-          return a.name.localeCompare(b.name);
-        case 'price':
-          return b.price - a.price;
-        case 'availability': {
-          const aAvailable = a.monthsAvailable[hemisphere].length === 0 ? true : isCurrentlyAvailable(a, hemisphere);
-          const bAvailable = b.monthsAvailable[hemisphere].length === 0 ? true : isCurrentlyAvailable(b, hemisphere);
-          if (aAvailable === bAvailable) {
-            return a.name.localeCompare(b.name);
-          }
-          return aAvailable ? -1 : 1;
-        }
-        default:
-          return 0;
+      const currentMonth = new Date().getMonth() + 1;
+    
+      // Determine if a critter is always available (i.e. available year‐round)
+      const aAlwaysAvailable = a.monthsAvailable[hemisphere].length === 0;
+      const bAlwaysAvailable = b.monthsAvailable[hemisphere].length === 0;
+    
+      // Determine "currently available" using time-of-day criteria, or if always available
+      const aCurrentlyAvailable = aAlwaysAvailable || isCurrentlyAvailable(a, hemisphere);
+      const bCurrentlyAvailable = bAlwaysAvailable || isCurrentlyAvailable(b, hemisphere);
+    
+      // Determine if the critter is seasonally available (i.e. available during the current month)
+      const aSeasonal = a.monthsAvailable[hemisphere].includes(currentMonth);
+      const bSeasonal = b.monthsAvailable[hemisphere].includes(currentMonth);
+    
+      // Assign a rank based on availability:
+      // 0 = currently available (time criteria met or always available)
+      // 1 = seasonally available (current month included) but not currently available
+      // 2 = not available this month at all
+      const getRank = (currently: boolean, seasonal: boolean) => {
+        if (currently) return 0;
+        if (seasonal) return 1;
+        return 2;
+      };
+    
+      const aRank = getRank(aCurrentlyAvailable, aSeasonal);
+      const bRank = getRank(bCurrentlyAvailable, bSeasonal);
+    
+      // Lower rank items come first
+      if (aRank !== bRank) {
+        return aRank - bRank;
       }
-    });
+    
+      // If both critters have the same rank, sort alphabetically by name
+      return a.name.localeCompare(b.name);
+    });    
 
     setFilteredCritters(result);
   }, [critters, filters, hemisphere]);
