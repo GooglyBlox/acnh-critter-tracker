@@ -6,6 +6,7 @@
 
 Track and catch critters in Animal Crossing: New Horizons with real-time availability.
 
+<img src="public/image.png" alt="ACNH Critter Tracker Screenshot" style="vertical-align: middle" />
 </div>
 
 ## Features
